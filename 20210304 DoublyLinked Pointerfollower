@@ -1,0 +1,22 @@
+const LinkedList = require('./LinkedList');
+const testLinkedList = require('./testLinkedList.js');
+// Complete this function
+const nthLastNode = ( linkedList, n) => {
+tailseeker = linkedList.head
+let count = 0
+
+let follower = null
+while (tailseeker) {
+tailseeker = tailseeker.next
+if (count === n-1) {follower = linkedList.head; }
+if (count > n-1) {follower = follower.next }
+count ++
+}
+return follower
+};
+
+// Test your function yourself:
+console.log(nthLastNode(testLinkedList, 4));
+
+// Leave this so that we can test your code:
+module.exports = nthLastNode;
