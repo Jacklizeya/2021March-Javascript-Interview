@@ -132,9 +132,13 @@ class HashMap {
     }
     let current = linkedList.head;
     while (current) {
+    
+   //~~~~~~~~~~~~~~~~~~~once you found the one, stop the loop
       if (current.data.key === key) {
-        current.data = { key, value };
+        current.data = { key, value };break;
       }
+      
+   //````````````````````you cannot find it after all the items, then add a new tail   
       if (!current.next) {
         current.next = new Node({ key, value });
         break;
