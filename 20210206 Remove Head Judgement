@@ -1,0 +1,30 @@
+class Node {
+  setNextNode(data) {/* Method that sets the next node */}
+  getPreviousNode() {/* Method that returns the previous node */}
+}
+
+class DoublyLinkedList {
+  removeHead(){/* Method that removes the head of the list */}
+  removeTail() {
+    const removedTail = this.tail;
+
+// three procedures need to go through
+
+// Check step 1 do we have a tail or we are empty? 
+// we can actually use if else here
+// we set up a new tail
+    if (!removedTail) { return; } this.tail = removedTail.getPreviousNode();
+
+// Check step 2.1 do we have a new tail? if we have
+// we have a new tail
+    if (this.tail) { this.tail.setNextNode(null);    }
+
+// Check step 2.2, this actually equals to we donot have a new tail
+// the operation removedTail = this.head can be presented in my ways like 
+// this.tail === null also means we donot have a previous node
+    if (removedTail === this.head) {
+      this.removeHead();
+    }
+    return removedTail.data;
+  }
+}
