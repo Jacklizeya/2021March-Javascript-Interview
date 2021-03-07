@@ -1,0 +1,12 @@
+result = Queue()
+ 
+while not q1.empty() or not q2.empty():
+  if q1.empty():
+    result.enqueueAll(q2)
+  if q2.empty():
+    result.enqueueAll(q1)
+  
+    if q1.peek() < q2.peek():
+        result.enqueue(q1.dequeue())
+    else:
+        result.enqueue(q2.dequeue())
