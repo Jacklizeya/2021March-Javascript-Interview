@@ -1,0 +1,74 @@
+class SingleNode{
+constructor(value)
+{this.value = value;
+ this.next = null
+}
+}
+
+class LinkedList{
+constructor() {
+this.head = null
+}
+}
+
+class DoublyNode{
+  constructor(value)
+  {this.value = value;
+   this.next = null
+   this.previous = null
+  }
+  }
+
+class DoublyLinkedList{
+  constructor() {
+  this.head = null
+  this.tail = null
+  }
+  }
+// stack is a linkedlist with only head
+class Stack{
+  constructor(maxSize) {
+    this.stack = new LinkedList()
+    this.maxSize = maxSize
+    this.size = 0
+  }
+}
+// Queue inside it is a DoublyLinkedList with tail
+class Queue{
+  constructor(maxSize) {
+    this.queue = new DoublyLinkedList()
+    this.maxSize = maxSize
+    this.size  = 0
+  }
+}
+
+// Hash map is an array, each element is a linkedlist
+class HashMap{
+  constructor(size = 0) {
+    this.hashMap = new Array(size).fill(null).map((item)=>{return new LinkedList()})
+  }
+}
+
+// as a regular tree, it is contructed by nodes, nodes need value and children
+class treeNode{
+  cosntructor(data){
+    this.data=data;
+    this.children= []
+  }
+}
+// as a binary tree, we need a start point as data, and left or right
+class BinarytreeNode {
+  constructor(data){
+    this.data = data
+    this.left = null
+    this.right = null
+  }
+}
+// as a heap, it is basically an array and Pseudo tree
+// we need an .heap to store array and .size
+class heap{
+  constructor(){
+  this.heap = [null];
+  this.size = 0
+  }
+}
