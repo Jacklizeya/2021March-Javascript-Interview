@@ -1,0 +1,24 @@
+class DoublyLinkedList {
+   
+  removeByData(data) {
+    let nodeToRemove;
+    let currentNode = this.head;
+    
+//********************************go and look for the one you want    
+    while (currentNode !== null) {
+      if (currentNode.data === data) { nodeToRemove = currentNode;  break;}  
+      currentNode = currentNode.getNextNode();
+    }
+    
+    
+//********************************4 situations, did not found it or fount it (at the head, at the tail, in the middle)
+    if (!nodeToRemove) {      return null;    }
+    
+    if (nodeToRemove === this.head) {this.removeHead();} 
+    else if (nodeToRemove === this.tail) { this.removeTail();    }
+    else {const nextNode = nodeToRemove.getNextNode();const previousNode = nodeToRemove.getPreviousNode();nextNode.setPreviousNode(previousNode);previousNode.setNextNode(nextNode);}
+    
+    
+    return nodeToRemove;
+  }  
+}
