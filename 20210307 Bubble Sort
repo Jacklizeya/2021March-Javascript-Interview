@@ -1,0 +1,39 @@
+// Self made buble sort Algorithm
+
+let list =[100,99,88,77,66,55,44,33,22,11]
+let sorted = false
+let runcount = 0
+
+while(!sorted) {
+
+let swapcount = 0
+for (i=0; i< list.length -1; i++) {
+if (list[i] > list [i+1]) { let former = list[i]; let latter = list[i+1]; list[i+1] = former; list[i] = latter; swapcount++; runcount++}
+}
+
+if (swapcount === 0) {sorted = true}
+
+}
+
+console.log(list)
+console.log(list.length, runcount)
+
+
+
+// Tutorial design
+
+const swap = require('./swap');
+
+const bubbleSort = input => {
+  let swapping = true;
+  
+  while (swapping) {
+    swapping = false;
+    for (let i = 0; i < input.length - 1; i++) {
+    if (input[i] > input [i+1]) {swapping = true;console.log(`Swapping pair ${input[i]}, ${input[i+1]} in [${input}]`); swap(input, i, i+1)}  
+    }
+  }
+  return input;
+};
+
+module.exports = bubbleSort;
