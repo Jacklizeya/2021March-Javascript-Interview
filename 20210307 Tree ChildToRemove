@@ -1,0 +1,12 @@
+removeChild(childToRemove) {
+
+  const length = this.children.length;
+  
+  // filter will remove all the target in the next layer
+  
+  this.children = this.children.filter(child => {    return childToRemove instanceof TreeNode  ? child !== childToRemove  : child.data !== childToRemove;  });
+ 
+  if (length === this.children.length) {    this.children.forEach(child => child.removeChild(childToRemove) )  }
+  
+}
+ 
