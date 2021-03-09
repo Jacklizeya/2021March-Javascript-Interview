@@ -1,0 +1,144 @@
+//***********************Graph
+const Edge = require('./Edge.js');
+const Vertex = require('./Vertex.js');
+
+class Graph {
+  constructor(isWeighted = false, isDirected = false) {
+    this.vertices = [];
+    this.isWeighted = isWeighted;
+    this.isDirected = isDirected;
+  }
+
+  addVertex(data) {
+    let datalist = []
+    this.vertices.forEach((vertices)=> datalist.push(vertices.data))
+    if (datalist.includes(data)) {console.log("already there"); return}
+
+    const newVertex = new Vertex(data);
+    this.vertices.push(newVertex);
+    return newVertex};
+  
+
+  removeVertex(vertex) 
+  {
+    this.vertices = this.vertices.filter(v => v !== vertex);
+  }
+
+  addEdge(vertexOne, vertexTwo, weight) {
+    const edgeWeight = this.isWeighted ? weight : null;
+
+    if (vertexOne instanceof Vertex && vertexTwo instanceof Vertex) {
+      vertexOne.addEdge(vertexTwo, edgeWeight);
+
+      if (!this.isDirected) {
+        vertexTwo.addEdge(vertexOne, edgeWeight);
+      }
+    } else {
+      throw new Error('Expected Vertex arguments.');
+    }
+  }
+
+  removeEdge(vertexOne, vertexTwo) {
+    if (vertexOne instanceof Vertex && vertexTwo instanceof Vertex) {
+      vertexOne.removeEdge(vertexTwo);
+
+      if (!this.isDirected) {
+        vertexTwo.removeEdge(vertexOne);
+      }
+    } else {
+      throw new Error('Expected Vertex arguments.');
+    }
+  }
+
+  print() {
+    this.vertices.forEach(vertex => vertex.print());
+  }
+}
+
+module.exports = Graph;
+
+
+//************************Vertex 
+
+const Edge = require('./Edge.js');
+
+class Vertex {
+  constructor(data) {
+    this.data = data;
+    this.edges = [];
+  }
+
+  addEdge(vertex, weight) {
+    if (vertex instanceof Vertex) {
+      this.edges.push(new Edge(this, vertex, weight));
+    } else {
+      throw new Error('Edge start and end must both be Vertex');
+    }
+  }
+
+  removeEdge(vertex) {
+    this.edges = this.edges.filter(edge => edge.end !== vertex);
+  }
+
+  print() {
+    const edgeList = this.edges.map(edge =>
+        edge.weight !== null ? `${edge.end.data} (${edge.weight})` : edge.end.data);
+
+    const output = `${this.data} --> ${edgeList.join(', ')}`;
+    console.log(output);
+  }
+}
+
+module.exports = Vertex;
+
+
+
+//********************Edges
+class Edge {
+  constructor(start, end, weight = null) {
+    this.start = start;
+    this.end = end;
+    this.weight = weight;
+  }
+}
+
+module.exports = Edge;
+
+
+//*********************Execution File
+
+const Graph = require('./Graph.js');
+
+const trainNetwork = new Graph(true, true)
+
+const stations =["Los Angeles", "San Francisco", "New York", "Atlanta", "Denver", "Calgary"
+]
+
+
+
+stations.forEach( (station)=> trainNetwork.addVertex(station))
+trainNetwork.addVertex("Los Angeles")
+
+
+listOfVertices = trainNetwork.vertices
+
+console.log(listOfVertices)
+
+
+trainNetwork.addEdge(listOfVertices[1], listOfVertices[0], 400)
+trainNetwork.addEdge(listOfVertices[0], listOfVertices[1], 400)
+trainNetwork.addEdge(listOfVertices[2], listOfVertices[4], 1800)
+trainNetwork.addEdge(listOfVertices[4], listOfVertices[2], 1800)
+trainNetwork.addEdge(listOfVertices[5], listOfVertices[4], 1000)
+trainNetwork.addEdge(listOfVertices[4], listOfVertices[5], 1000)
+trainNetwork.addEdge(listOfVertices[0], listOfVertices[3], 2100)
+trainNetwork.addEdge(listOfVertices[3], listOfVertices[0], 2100)
+
+// remove route from New York to Denver
+trainNetwork.removeEdge(listOfVertices[2], listOfVertices[4])
+// remove anything realted to calgary
+trainNetwork.removeEdge(listOfVertices[5], listOfVertices[4])
+trainNetwork.removeEdge(listOfVertices[4], listOfVertices[5])
+trainNetwork.removeVertex(listOfVertices[5])
+
+
