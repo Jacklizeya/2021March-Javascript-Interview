@@ -72,3 +72,36 @@ class heap{
   this.size = 0
   }
 }
+
+
+//*************graph
+class Vertex {
+  constructor(data) {
+    this.data = data;
+    this.edges = [];
+  }
+  
+ class Edge {
+  constructor(start, end, weight = null) {
+    this.start = start;
+    this.end = end;
+    this.weight = weight;
+  }
+}
+
+class Graph {
+  constructor(isWeighted = false, isDirected = false) {
+    this.vertices = [];
+    this.isWeighted = isWeighted;
+    this.isDirected = isDirected;
+  }
+
+
+
+
+
+
+
+
+
+
