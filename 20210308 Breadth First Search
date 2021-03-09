@@ -1,0 +1,105 @@
+//***********************Queue.js
+
+const LinkedList = require('./LinkedList');
+
+class Queue {
+  constructor(maxSize = Infinity) {
+    this.queue = new LinkedList();
+    this.maxSize = maxSize;
+    this.size = 0;
+  }
+
+  hasRoom() {
+    return this.size < this.maxSize;
+  }
+
+  isEmpty() {
+    return this.size === 0;
+  }
+
+  enqueue(data) {
+    if (this.hasRoom()) {
+      this.queue.addToTail(data);
+      this.size++;
+    } else {
+      throw new Error('Queue is full!');
+    }
+  }
+
+  dequeue() {
+    if (!this.isEmpty()) {
+      const data = this.queue.removeHead();
+      this.size--;
+      return data;
+    } else {
+      throw new Error('Queue is empty!');
+    }
+  }
+}
+
+module.exports = Queue;
+
+
+
+//********************testGraph.js
+
+const { Graph } = require('./Graph.js');
+
+const simpleGraph = new Graph(true, false);
+const startNode = simpleGraph.addVertex('v0.0.0');
+const v1 = simpleGraph.addVertex('v1.0.0');
+const v2 = simpleGraph.addVertex('v2.0.0');
+
+const v11 = simpleGraph.addVertex('v1.1.0');
+const v12 = simpleGraph.addVertex('v1.2.0');
+const v21 = simpleGraph.addVertex('v2.1.0');
+
+const v111 = simpleGraph.addVertex('v1.1.1');
+const v112 = simpleGraph.addVertex('v1.1.2');
+const v121 = simpleGraph.addVertex('v1.2.1');
+const v211 = simpleGraph.addVertex('v2.1.1');
+
+simpleGraph.addEdge(startNode, v1);
+simpleGraph.addEdge(startNode, v2);
+
+simpleGraph.addEdge(v1, v11);
+simpleGraph.addEdge(v1, v12);
+simpleGraph.addEdge(v2, v21);
+
+simpleGraph.addEdge(v11, v111);
+simpleGraph.addEdge(v11, v112);
+simpleGraph.addEdge(v12, v121);
+simpleGraph.addEdge(v21, v211);
+
+module.exports = simpleGraph;
+
+//*************************breadthFirstSearch
+const testGraph = require('./testGraph.js');
+const Queue = require('./Queue.js');
+
+const breadthFirstTraversal = (start) => {
+  const visitedVertices = [start];
+  const visitQueue = new Queue
+  visitQueue.enqueue(start)
+
+  
+
+while(!visitQueue.isEmpty()) 
+  {
+  const current = visitQueue.dequeue()
+  console.log(current.data)
+  current.edges.forEach((edge) =>{
+  const neighbor = edge.end;
+ if (!visitedVertices.includes(neighbor)) {
+   visitedVertices.push(neighbor)
+   visitQueue.enqueue(neighbor)
+ }
+ 
+  })
+}
+
+}
+
+
+breadthFirstTraversal(testGraph.vertices[0]);
+
