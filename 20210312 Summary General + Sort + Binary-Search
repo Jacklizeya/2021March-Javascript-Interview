@@ -1,0 +1,76 @@
+  // This is basica traversal, more like depth based recursion -- but only goes one way through if statement
+  getNodeByValue(value) {
+    if (this.value === value) {      return this;    } 
+    else if ((this.left) && (value < this.value)) {        return this.left.getNodeByValue(value);    } 
+    else if (this.right) {        return this.right.getNodeByValue(value);    } 
+    else {      return null;    }
+  }
+  
+  
+  //
+  /*
+  This is typical method to handle tree, there are 4 situations, depends on you have/not have left or right child
+  Imagine you are putting stack on top of each other with first path: depth based.*/
+  
+  const mergeSort = (startArray) => {
+  const length = startArray.length;
+  if (length === 1) {    return startArray;  }
+  
+  const mid = Math.floor(length / 2);
+  const leftArray = startArray.slice(0, mid);
+  const rightArray = startArray.slice(mid, length);
+ 
+  return merge(mergeSort(leftArray), mergeSort(rightArray));
+}
+ 
+const merge = (leftArray, rightArray) => {
+  const sortedArray = []
+  while (leftArray.length > 0 && rightArray.length > 0) {
+    if (leftArray[0] < rightArray[0]) {      sortedArray.push(leftArray[0]);      leftArray.shift();    } 
+    else {      sortedArray.push(rightArray);      rightArray[0].shift();    }
+  }
+  
+  return sortedArray.concat(leftArray).concat(rightArray);}
+  
+  
+  //Quick sort is through iteration with pointers
+  
+  const quicksort = (array, leftBound = 0, rightBound = array.length - 1) => {
+  if (leftBound < rightBound) {
+    const pivotIndex = partition(array, leftBound, rightBound);
+    quicksort(array, leftBound, pivotIndex - 1);
+    quicksort(array, pivotIndex, rightBound);
+  }  return array;}
+
+const partition = (array, leftIndex, rightIndex) => {
+  const pivot = array[Math.floor((rightIndex + leftIndex) / 2)];
+  while (leftIndex <= rightIndex) {  while (array[leftIndex] < pivot) {
+      leftIndex++;  }
+    while (array[rightIndex] > pivot) {   rightIndex--;    }
+    if (leftIndex <= rightIndex) {  swap(array, leftIndex, rightIndex);   leftIndex++;    rightIndex--;    }  }
+  return leftIndex;
+}
+   
+  
+  
+  /*Using iteration to solve the binary search problem **************** Array + left + right Pointer + Iteration
+  */
+  
+  const binarySearch = (arr, target) => {
+  let left = 0;
+  let right = arr.length;
+  
+  while (right > left) {
+    const indexToCheck = Math.floor((left + right) / 2);
+    const checking = arr[indexToCheck];
+    console.log(indexToCheck);
+  
+    if (checking === target) {      return indexToCheck;    } 
+    else if (checking < target) {      left = indexToCheck + 1;    }
+    else {      right = indexToCheck;    }  }
+  
+  return null;
+}
+
+//*****************************
+
