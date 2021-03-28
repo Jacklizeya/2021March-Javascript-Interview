@@ -1,0 +1,28 @@
+// This is an input class. Do not edit.
+class BST {
+    constructor(value) {
+      this.value = value;
+      this.left = null;
+      this.right = null;
+    }
+  }
+  
+  function validateBst(tree) {
+    // Write your code here.
+    if (tree.left === null && tree.right === null) {return true}
+    else if (tree.left !==null && tree.right !== null)
+     { 
+         if (tree.left.value < tree.value && tree.value <= tree.right.value)  {
+             return (validateBst(tree.left) && validateBst(tree.right))} 
+         else {return false}
+    }
+    else if (tree.left ===null && tree.right !== null) { if (tree.right.value >= tree.value) { return validateBst(tree.right)} else {return false}}
+    else {if (tree.left.value < tree.value) {return validateBst(tree.left)} else {return false}}
+  }
+  
+  // Do not edit the line below.
+  exports.BST = BST;
+  exports.validateBst = validateBst;
+  
+  
+  
